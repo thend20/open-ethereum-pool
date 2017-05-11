@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
-RUN apt-get update && apt-get -y install curl && curl -sL https://deb.nodesource.com/setup_6.x | bash -
-RUN apt-get update && apt-get -y install build-essential golang nodejs git
+RUN apt-get update && apt-get -y install curl software-properties-common && curl -sL https://deb.nodesource.com/setup_6.x | bash -
+RUN add-apt-repository ppa:longsleep/golang-backports && apt-get update && apt-get -y install build-essential golang-go nodejs git
 
 RUN git config --global http.https://gopkg.in.followRedirects true
 
@@ -42,10 +42,10 @@ COPY payouts.sh /payouts.sh
 COPY pool.sh /pool.sh
 COPY geth.sh /geth.sh
 
-RUN chmod a+x /payouts.sh && chmod a+x /pool.sh && chmod a+x /gmc.sh
+RUN chmod a+x /payouts.sh && chmod a+x /pool.sh && chmod a+x /geth.sh
 
 CMD ["/usr/bin/supervisord"]
 
 VOLUME ["/root/.musicoin"]
 
-EXPOSE 8008 80
+EXPOSE 8008 8088 80
