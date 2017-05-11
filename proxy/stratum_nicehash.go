@@ -9,7 +9,7 @@ import (
 	"errors"
 	"time"
 
-	"../util"
+	"github.com/bulktrade/open-ethereum-pool/util"
 	"math/rand"
 	"strings"
 )
