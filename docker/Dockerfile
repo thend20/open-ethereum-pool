@@ -1,10 +1,16 @@
 FROM ubuntu:16.04
 RUN apt-get update && apt-get -y install curl software-properties-common && curl -sL https://deb.nodesource.com/setup_6.x | bash -
-RUN add-apt-repository ppa:longsleep/golang-backports && apt-get update && apt-get -y install build-essential golang-go nodejs git
+RUN apt-get update && apt-get -y install build-essential nodejs git wget
 
 RUN git config --global http.https://gopkg.in.followRedirects true
 
 WORKDIR /opt
+
+RUN wget https://storage.googleapis.com/golang/go1.7.3.linux-amd64.tar.gz && \
+    tar -zxvf go1.7.*.linux-amd64.tar.gz -C /usr/local && \
+    echo 'export GOROOT=/usr/local/go/bin/go' >> ~/.bashrc && \
+    echo 'export GOPATH=$HOME/go' >> ~/.bashrc && \
+    echo 'export PATH=$PATH:$GOROOT/bin:$GOPATH/bin' >> ~/.bashrc
 
 RUN git clone https://github.com/ethereum/go-ethereum.git
 
