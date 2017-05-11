@@ -12,8 +12,8 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"github.com/sammy007/open-ethereum-pool/storage"
-	"github.com/sammy007/open-ethereum-pool/util"
+	"github.com/bulktrade/open-ethereum-pool/storage"
+	"github.com/bulktrade/open-ethereum-pool/util"
 )
 
 type ApiConfig struct {
@@ -172,6 +172,7 @@ func (s *ApiServer) StatsIndex(w http.ResponseWriter, r *http.Request) {
 		reply["maturedTotal"] = stats["maturedTotal"]
 		reply["immatureTotal"] = stats["immatureTotal"]
 		reply["candidatesTotal"] = stats["candidatesTotal"]
+		//reply["nShares"] = stats["nShares"]
 	}
 
 	err = json.NewEncoder(w).Encode(reply)
