@@ -52,6 +52,6 @@ RUN chmod a+x /payouts.sh && chmod a+x /pool.sh && chmod a+x /geth.sh
 
 CMD ["/usr/bin/supervisord"]
 
-VOLUME ["/root/.musicoin"]
+VOLUME ["/root/.ethereum"]
 
 EXPOSE 8008 8088 80
