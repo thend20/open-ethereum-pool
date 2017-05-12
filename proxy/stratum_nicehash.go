@@ -184,6 +184,18 @@ func(cs *Session) sendJob(s *ProxyServer, id *json.RawMessage) error {
 func (cs *Session) handleNHTCPMessage(s *ProxyServer, req *StratumReq) error {
 	// Handle RPC methods
 	switch req.Method {
+	case "eth_submitLogin":
+		var params []string
+		err := json.Unmarshal(*req.Params, &params)
+		if err != nil {
+			log.Println("Malformed stratum request params from", cs.ip)
+			return err
+		}
+		reply, errReply := s.handleLoginRPC(cs, params, req.Worker)
+		if errReply != nil {
+			return cs.sendTCPError(req.Id, errReply)
+		}
+		return cs.sendTCPResult(req.Id, reply)
 	case "mining.subscribe":
 		var params []string
 		err := json.Unmarshal(*req.Params, &params)
