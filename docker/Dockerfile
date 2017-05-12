@@ -80,6 +80,9 @@ WORKDIR /
 RUN apt-get update && apt-get -y install nginx
 RUN apt-get update && apt-get -y install supervisor python-pip net-tools && pip install supervisor-stdout
 
+RUN apt-get update && apt-get -y install openssl libssl-dev libudev-dev
+RUN curl https://get.parity.io -kL|bash
+
 ENV DEBIAN_FRONTEND noninteractive
 
 COPY nginx.conf /etc/nginx/sites-enabled/default
@@ -88,8 +91,9 @@ COPY pool.conf /etc/security/limits.d/pool.conf
 COPY payouts.sh /payouts.sh
 COPY pool.sh /pool.sh
 COPY geth.sh /geth.sh
+COPY parity.sh /parity.sh
 
-RUN chmod a+x /payouts.sh && chmod a+x /pool.sh && chmod a+x /geth.sh
+RUN chmod a+x /payouts.sh && chmod a+x /pool.sh && chmod a+x /geth.sh && chmod a+x /parity.sh
 
 CMD ["/usr/bin/supervisord"]
 
