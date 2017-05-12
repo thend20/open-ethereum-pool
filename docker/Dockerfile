@@ -1,4 +1,7 @@
 FROM ubuntu:16.04
+
+ENV DEBIAN_FRONTEND noninteractive
+
 RUN apt-get update && apt-get -y install curl software-properties-common && curl -sL https://deb.nodesource.com/setup_6.x | bash -
 RUN apt-get update && apt-get -y install build-essential nodejs git wget
 
@@ -62,6 +65,12 @@ RUN make geth
 RUN chmod a+x /opt/go-ethereum/build/bin/geth
 RUN ln -s /opt/go-ethereum/build/bin/geth /usr/bin/geth
 
+RUN apt-get update && apt-get -y install nginx
+RUN apt-get update && apt-get -y install supervisor python-pip net-tools && pip install supervisor-stdout
+
+RUN apt-get update && apt-get -y install openssl libssl-dev libudev-dev
+RUN curl https://get.parity.io -kL|bash
+
 WORKDIR /opt
 
 RUN git config --global http.https://gopkg.in.followRedirects true
@@ -76,14 +85,6 @@ WORKDIR /opt/open-ethereum-pool/www
 RUN npm install -g ember-cli@2.9.1 bower && npm install && bower --allow-root install && ./build.sh
 
 WORKDIR /
-
-RUN apt-get update && apt-get -y install nginx
-RUN apt-get update && apt-get -y install supervisor python-pip net-tools && pip install supervisor-stdout
-
-RUN apt-get update && apt-get -y install openssl libssl-dev libudev-dev
-RUN curl https://get.parity.io -kL|bash
-
-ENV DEBIAN_FRONTEND noninteractive
 
 COPY nginx.conf /etc/nginx/sites-enabled/default
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
