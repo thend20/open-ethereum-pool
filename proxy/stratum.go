@@ -9,7 +9,7 @@ import (
 	"net"
 	"time"
 
-	"github.com/bulktrade/open-ethereum-pool/util"
+	"github.com/ubiq/open-ethereum-pool/util"
 )
 
 const (

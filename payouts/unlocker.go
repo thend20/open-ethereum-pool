@@ -10,9 +10,9 @@ import (
 
 	"github.com/ethereum/go-ethereum/common/math"
 
-	"github.com/bulktrade/open-ethereum-pool/rpc"
-	"github.com/bulktrade/open-ethereum-pool/storage"
-	"github.com/bulktrade/open-ethereum-pool/util"
+	"github.com/ubiq/open-ethereum-pool/rpc"
+	"github.com/ubiq/open-ethereum-pool/storage"
+	"github.com/ubiq/open-ethereum-pool/util"
 )
 
 type UnlockerConfig struct {
@@ -113,6 +113,12 @@ func (u *BlockUnlocker) unlockCandidates(candidates []*storage.BlockData) (*Unlo
 		/* Search for a normal block with wrong height here by traversing 16 blocks back and forward.
 		 * Also we are searching for a block that can include this one as uncle.
 		 */
+                if candidate.Height < minDepth {
+                                orphan = false
+                                // avoid scanning the first 16 blocks
+                                continue
+                }
+
 		for i := int64(minDepth * -1); i < minDepth; i++ {
 			height := candidate.Height + i
 

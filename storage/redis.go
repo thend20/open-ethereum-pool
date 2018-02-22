@@ -9,7 +9,7 @@ import (
 
 	"gopkg.in/redis.v3"
 
-	"github.com/bulktrade/open-ethereum-pool/util"
+	"github.com/ubiq/open-ethereum-pool/util"
 )
 
 type Config struct {

@@ -13,10 +13,10 @@ import (
 
 	"github.com/yvasiyarov/gorelic"
 
-	"github.com/bulktrade/open-ethereum-pool/api"
-	"github.com/bulktrade/open-ethereum-pool/payouts"
-	"github.com/bulktrade/open-ethereum-pool/proxy"
-	"github.com/bulktrade/open-ethereum-pool/storage"
+	"github.com/ubiq/open-ethereum-pool/api"
+	"github.com/ubiq/open-ethereum-pool/payouts"
+	"github.com/ubiq/open-ethereum-pool/proxy"
+	"github.com/ubiq/open-ethereum-pool/storage"
 )
 
 var cfg proxy.Config
