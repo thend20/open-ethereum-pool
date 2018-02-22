@@ -1,4 +1,56 @@
+<h4>Recently Found Blocks:</h4>
+{{#if model.candidates}}
+<table class="table table-condensed table-striped">
+  <thead>
+    <tr>
+      <th>Height</th>
+      <th>Time Found</th>
+      <th>Variance</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each model.candidates as |block|}}
+    <tr>
+      <td><a href="https://etherscan.io/block/{{block.height}}" rel="nofollow" target="_blank">{{format-number block.height}}</a></td>
+      <td>{{format-date-locale block.timestamp}}</td>
+      <td>
+        {{#if block.isLucky}}
+        <span class="label label-success">{{format-number block.variance style='percent'}}</span>
+        {{else}}
+        <span class="label label-info">{{format-number block.variance style='percent'}}</span>
+        {{/if}}
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+{{else}}
+<h3>-</h3>
+{{/if}}
+<h4>Immature Blocks:</h4>
+{{#if model.immature}}
+<table class="table table-condensed table-striped">
+  <thead>
+    <tr>
+      <th>Height</th>
+      <th>Block Hash</th>
+      <th>Time Found</th>
+      <th>Variance</th>
+      <th>Reward</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each model.immature as |block|}}
+      {{partial "blocks/block"}}
+    {{/each}}
+  </tbody>
+</table>
+{{else}}
+<h3>-</h3>
+{{/if}}
+<h4>Matured Blocks:</h4>
 {{#if model.matured}}
+<<<<<<< HEAD
 <h4>Matured Blocks</h4>
 <div class="table-responsive">
   <table class="table table-condensed table-striped">
@@ -18,6 +70,24 @@
     </tbody>
   </table>
 </div>
+=======
+<table class="table table-condensed table-striped">
+  <thead>
+    <tr>
+      <th>Height</th>
+      <th>Block Hash</th>
+      <th>Time Found</th>
+      <th>Variance</th>
+      <th>Reward</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each model.matured as |block|}}
+      {{partial "blocks/block"}}
+    {{/each}}
+  </tbody>
+</table>
+>>>>>>> f86f4a3fa782df0c48ceddc53377f9d3c3b2b030
 {{else}}
-<h3>No matured blocks yet</h3>
+<h3>-</h3>
 {{/if}}

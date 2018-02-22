@@ -5,8 +5,11 @@
         <h1 style="font-size: 24px">
           <strong>Open Ethereum Pool</strong>
         </h1>
-        <strong>Min. payout threshold: {{config.PayoutThreshold}}</strong>, Payouts run twice per day.<br/>
-        <span class="label label-success">PROP</span> Stable and profitable pool with regular payouts.
+        <strong>Min. payout threshold: {{config.PayoutThreshold}}</strong>, Payouts runs every hour.<br/>
+	<table>
+        <tr><td><span class="label label-success">PPLNS</span></td><td> Pay-Per-Last-1000-Shares</td></tr>
+        <tr><td><span class="label label-success">4G</span></td><td> Share difficulty for high mining efficiency</td></tr>
+	</table>
       </div>
       <div class="col-md-3 stats">
         <div><i class="fa fa-users"></i> Miners Online: <span id="poolHashrate">{{format-number stats.model.minersTotal}}</span></div>
